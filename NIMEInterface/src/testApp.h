@@ -50,6 +50,7 @@ class testApp : public ofSimpleApp{
 		bool bluepressed;
 		bool yellowpressed;
 		ofxOscSender sender;
+		ofSerial	serial;
 			
 		
 		

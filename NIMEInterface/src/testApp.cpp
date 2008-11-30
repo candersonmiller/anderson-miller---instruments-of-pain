@@ -48,6 +48,21 @@ void drawLine(float targetline){
 	
 }
 
+void sendPlay(int channel, ofxOscSender sender, ofSerial serial){
+	ofxOscMessage m;
+	m.setAddress( "/play" );
+	m.addIntArg( channel );
+	sender.sendMessage( m );
+}
+
+void sendRec(int channel, ofxOscSender sender, ofSerial serial){
+	ofxOscMessage m;
+	m.setAddress( "/rec" );
+	m.addIntArg( channel );
+	sender.sendMessage( m );
+	serial.writeByte(channel);
+}
+
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -109,6 +124,11 @@ void testApp::setup(){
 
 	// open an outgoing connection to HOST:PORT
 	sender.setup( HOST, PORT );
+	serial.enumerateDevices();
+	
+	
+	//----------------------------------- note:
+	serial.setup("/dev/tty.usbserial-A4001JEC", 9600);		// < this should be set
 }
 
 //--------------------------------------------------------------
@@ -199,6 +219,7 @@ void testApp::draw(){
 		for(int i = 0; i < pianoroll.size(); i++){
 			if( pianoroll[i].target(targetline, 'r') ){
 				//send play osc message to chuck
+				sendPlay(1, sender, serial);
 			}
 		}
 	}
@@ -210,7 +231,7 @@ void testApp::draw(){
 		ofRect(1235, 95, 30, 30);
 		for(int i = 0; i < pianoroll.size(); i++){
 			if( pianoroll[i].target(targetline, 'g') ){
-				//send play osc message to chuck
+				sendPlay(2,sender, serial);
 			}
 		}
 	}
@@ -222,7 +243,7 @@ void testApp::draw(){
 		ofRect(1270, 95, 30, 30);
 		for(int i = 0; i < pianoroll.size(); i++){
 			if( pianoroll[i].target(targetline, 'b') ){
-				//send play osc message to chuck
+				sendPlay(3,sender, serial);
 			}
 		}
 	}
@@ -234,7 +255,7 @@ void testApp::draw(){
 		ofRect(1305, 95, 30, 30);
 		for(int i = 0; i < pianoroll.size(); i++){
 			if( pianoroll[i].target(targetline, 'y') ){
-				//send play osc message to chuck
+				sendPlay(4,sender, serial);
 			}
 		}
 	}
@@ -245,6 +266,7 @@ void testApp::draw(){
 			int toHitMe = pianoroll[i].isMissed(targetline);
 			if( toHitMe ){
 				cout << toHitMe << endl;
+				sendRec(toHitMe,sender, serial);
 			}
 		}
 	}
@@ -325,11 +347,7 @@ void testApp::keyReleased  (int key){
 }
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-	ofxOscMessage m;
-	m.setAddress( "/mouse/position" );
-	m.addIntArg( x );
-	m.addIntArg( y );
-	sender.sendMessage( m );
+
 }
 
 //--------------------------------------------------------------
