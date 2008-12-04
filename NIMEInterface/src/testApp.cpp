@@ -60,6 +60,8 @@ void sendRec(int channel, ofxOscSender sender, ofSerial serial){
 	m.setAddress( "/rec" );
 	m.addIntArg( channel );
 	sender.sendMessage( m );
+	channel += 48;
+	serial.setup("/dev/tty.usbserial-A70062Z4", 19200);
 	serial.writeByte(channel);
 }
 
@@ -72,7 +74,7 @@ void testApp::setup(){
 	// followed by color
 	// followed by time to cross the screen
 	
-	ifstream myfile ("/Users/andersonmiller/Downloads/of_preRelease_v0.05_xcode_FAT/apps/examples/NIME Example/data/sequence.txt");
+	ifstream myfile ("/Users/andersonmiller/Downloads/of_preRelease_v0.05_xcode_FAT/apps/addonsExamples/NIMEExampleWithOSC/data/sequence.txt");
 	if(myfile.is_open()){
 		while(!myfile.eof()){
 			getline (myfile,line);
@@ -119,8 +121,8 @@ void testApp::setup(){
 	bluepressed = false;
 	yellowpressed = false;
 	paused = false;
-	speed = 1.2;
-	//ofBackground( 40, 100, 40 );
+	speed = 2.2;
+	ofBackground( 0, 0, 0 );
 
 	// open an outgoing connection to HOST:PORT
 	sender.setup( HOST, PORT );
@@ -128,7 +130,7 @@ void testApp::setup(){
 	
 	
 	//----------------------------------- note:
-	serial.setup("/dev/tty.usbserial-A4001JEC", 9600);		// < this should be set
+	serial.setup("/dev/tty.usbserial-A70062Z4", 19200);		// < this should be set
 }
 
 //--------------------------------------------------------------
