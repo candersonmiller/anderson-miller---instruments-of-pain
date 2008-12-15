@@ -37,20 +37,23 @@ void punchMe(int number){
   
   if(number == 49){
     toggle(oneOut);
-    delay(punchDelay * 1.5);
+    delay(punchDelay * 3.0);
     toggle(oneIn);
+    //delay(punchDelay * 3.0);
   }
    
    if(number == 50){
     toggle(twoOut);
-    delay(punchDelay);
+    delay(punchDelay * 3.0 );
     toggle(twoIn);
+    //delay(punchDelay * 3.0 );
   }
   
   if(number == 51){
     toggle(threeOut);
-    delay(punchDelay * 1.5);
+    delay(punchDelay * 1.43);
     toggle(threeIn);
+    //delay(punchDelay * 1.43);
   }
   
 }
