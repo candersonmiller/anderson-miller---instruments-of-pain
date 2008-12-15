@@ -42,6 +42,8 @@ class testApp : public ofSimpleApp{
 		int iter;
 		float speed;
 		float targetline;
+	
+		int failtime;
 		bool paused;
 		bool recording;
 		bool playing;

@@ -74,7 +74,7 @@ void testApp::setup(){
 	// followed by color
 	// followed by time to cross the screen
 	
-	ifstream myfile ("/Users/andersonmiller/Downloads/of_preRelease_v0.05_xcode_FAT/apps/addonsExamples/NIMEExampleWithOSC/data/sequence.txt");
+	ifstream myfile ("/Users/andersonmiller/Downloads/of_preRelease_v0.05_xcode_FAT/apps/addonsExamples/NIMEProject/data/sequence.txt");
 	if(myfile.is_open()){
 		while(!myfile.eof()){
 			getline (myfile,line);
@@ -121,8 +121,9 @@ void testApp::setup(){
 	bluepressed = false;
 	yellowpressed = false;
 	paused = false;
-	speed = 2.2;
+	speed = 4.5;
 	ofBackground( 0, 0, 0 );
+	failtime = -200;
 
 	// open an outgoing connection to HOST:PORT
 	sender.setup( HOST, PORT );
@@ -146,6 +147,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	
 	//glMatrixMode(GL_PROJECTION);
 	//gluPerspective(45.0, ofGetScreenWidth()/ofGetScreenHeight(), 10.0, -10.0);
 	
@@ -288,12 +291,24 @@ void testApp::draw(){
 	glColor3f(0.7,0,0);
 	
 	
+	//if(failtime > (ofGetElapsedTimeMillis() - 100) ){
+	//	printf("true!!!\n");
+	//		ofDrawBitmapString( "MISSED!", 200, 200);
+	//}
+	
 	
 }
 
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){ 
+	if(key == OF_KEY_UP){
+		speed += 0.5;
+	}
+	
+	if(key == OF_KEY_DOWN){
+		speed -= 0.5;
+	}
 	if(key == 'r'){
 		redpressed = true;
 	}
@@ -302,7 +317,7 @@ void testApp::keyPressed  (int key){
 		greenpressed = true;
 	}
 	
-	if(key == 'b'){
+	if(key == 'a'){
 		bluepressed = true;
 	}
 	
@@ -310,7 +325,7 @@ void testApp::keyPressed  (int key){
 		yellowpressed = true;
 	}
 	
-	if ( key =='a' || key == 'A' )
+	if ( key =='z' || key == 'A' )
 	{
 		ofxOscMessage m;
 		m.setAddress( "/test" );
@@ -332,7 +347,7 @@ void testApp::keyReleased  (int key){
 		greenpressed = false;
 	}
 	
-	if(key == 'b'){
+	if(key == 'a'){
 		bluepressed = false;
 	}
 	
