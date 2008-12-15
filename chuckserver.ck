@@ -3,7 +3,7 @@ Hid hi;
 HidMsg msg;
  
 //Arrays of lisa objects
-250::ms => dur sampleLength;
+500::ms => dur sampleLength;
 LiSa button1[20];
 LiSa button2[20];
 LiSa button3[20];
@@ -78,7 +78,7 @@ fun void play_button() {
           button1[i].play(1);
           button1[i].playPos(0::ms);
         }
-        250::ms => now;
+        500::ms => now;
         for( 0 => int i ; i < 20; i++){
           button1[i].play(0);
         }
@@ -88,7 +88,7 @@ fun void play_button() {
           button2[i].play(1);
           button2[i].playPos(0::ms);
         }
-        250::ms => now;
+        500::ms => now;
         for( 0 => int i ; i < 20; i++){
           button2[i].play(0);
         }
@@ -98,7 +98,7 @@ fun void play_button() {
           button3[i].play(1);
           button3[i].playPos(0::ms);
         }
-        250::ms => now;
+        500::ms => now;
         for( 0 => int i ; i < 20; i++){
           button3[i].play(0);
         }
@@ -109,7 +109,7 @@ fun void play_button() {
           button4[i].play(1);
           button4[i].playPos(0::ms);
         }
-        250::ms => now;
+        500::ms => now;
         for( 0 => int i ; i < 20; i++){
           button4[i].play(0);
         }
@@ -129,7 +129,7 @@ fun void record_button() {
       if(button == 1){
           button1[button1Iter].recPos(0::ms);
           button1[button1Iter].record(1);
-          250::ms => now;
+          500::ms => now;
           button1[button1Iter].record(0);
           button1Iter++;
           if(button1Iter > 19){
@@ -139,7 +139,7 @@ fun void record_button() {
       if(button == 2){
           button2[button2Iter].recPos(0::ms);
           button2[button2Iter].record(1);
-          250::ms => now;
+          500::ms => now;
           button1[button2Iter].record(0);
           button2Iter++;
           if(button2Iter > 19){
@@ -149,7 +149,7 @@ fun void record_button() {
       if(button == 3){
           button3[button3Iter].recPos(0::ms);
           button3[button3Iter].record(1);
-          250::ms => now;
+          500::ms => now;
           button3[button3Iter].record(0);
           button3Iter++;
           if(button3Iter > 19){
@@ -159,7 +159,7 @@ fun void record_button() {
       if(button == 4){
           button4[button4Iter].recPos(0::ms);
           button4[button4Iter].record(1);
-          250::ms => now;
+          500::ms => now;
           button4[button4Iter].record(0);
           button4Iter++;
           if(button4Iter > 19){
